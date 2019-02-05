@@ -1,0 +1,19 @@
+{
+  "name": "git-branch-info-webpack-plugin",
+  "version": "1.0.0",
+  "description": "Creates a JSON file with information about the Git branch and last commit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Git",
+    "branch",
+    "commit",
+    "JSON",
+    "Webpack",
+    "plugin"
+  ],
+  "author": "Eli Wendlick",
+  "license": "ISC"
+}
