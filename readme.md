@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Git Commit Info Webpack Plugin</h1>
-  <p>Generate a JSON file containing information about the current Git commit via a [Webpack](http://webpack.github.io/) plugin</p>
+  <p>Generate a JSON file containing information about the current Git commit via a <a href="http://webpack.github.io/">Webpack</a> plugin</p>
 </div>
 
 <h2 align="center">Purpose</h2>
@@ -18,7 +18,7 @@ npm install --save git-commit-info-webpack-plugin
 
 To run with default options, modify your Webpack config file(s):
 ```js
-const GitTextPlugin = require("extract-text-webpack-plugin");
+const GitCommitInfoWebpackPlugin = require("git-commit-info-webpack-plugin");
 
 // ------
 
