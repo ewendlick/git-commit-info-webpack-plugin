@@ -1,10 +1,14 @@
 {
-  "name": "git-branch-info-webpack-plugin",
+  "name": "git-commit-info-webpack-plugin",
   "version": "1.0.0",
-  "description": "Creates a JSON file with information about the Git branch and last commit",
+  "description": "Generate a JSON file containing information about the current Git commit (branch name, author, commit message, commit hash, etc.) via Webpack",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewendlick/git-commit-info-webpack-plugin.git"
   },
   "keywords": [
     "Git",

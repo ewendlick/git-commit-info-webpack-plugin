@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { execSync } = require('child_process')
 
-class GitBranchInfoWebpackPlugin {
+class GitCommitInfoWebpackPlugin {
   constructor (options) {
     // Default options
     this.options = {
@@ -15,7 +15,7 @@ class GitBranchInfoWebpackPlugin {
   }
 
   apply (compiler) {
-    compiler.hooks.emit.tapAsync('Git Branch Info Webpack Plugin', (compilation, callback) => {
+    compiler.hooks.emit.tapAsync('Git Commit Info Webpack Plugin', (compilation, callback) => {
       let gitBranchName = ''
       let gitLastCommitDatetime = ''
       let gitLastCommitAuthor = ''
@@ -29,7 +29,7 @@ class GitBranchInfoWebpackPlugin {
 
       try {
         const commitDate = new Date(execSync('git log -1 --format=%ci'))
-        gitLastCommitDatetime = `${commitDate.getFullYear()}-${commitDate.getMonth()+1}-${commitDate.getDate()}`
+        gitLastCommitDatetime = `${commitDate.getFullYear()}-${commitDate.getMonth() + 1}-${commitDate.getDate()}`
           + ` ${commitDate.getHours()}:${commitDate.getMinutes()}`
       } catch (e) {
         console.error(e)
@@ -57,7 +57,7 @@ class GitBranchInfoWebpackPlugin {
       const fullPath = path.join(this.options.pathToFile, this.options.filename)
       fs.writeFile(fullPath, JSON.stringify(JSONContent), (err) => {
         if (err) {
-          console.log('Passed error: ', err)
+          console.log('Failed with error: ', err)
           console.log('Unable to create git.json file in path: ' + fullPath)
           throw err
         }
@@ -66,4 +66,4 @@ class GitBranchInfoWebpackPlugin {
   }
 }
 
-module.exports = GitBranchInfoWebpackPlugin
+module.exports = GitCommitInfoWebpackPlugin
