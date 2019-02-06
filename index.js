@@ -3,21 +3,23 @@ const path = require('path')
 const { execSync } = require('child_process')
 
 class GitBranchInfoWebpackPlugin {
-  // TODO: pass in arguments about the name of the output file, path of the output file
-  // names of the keys(?)
-  // TODO: date format
-  apply (compiler) {
-    // compiler.hooks.done.tap('Git Branch Info Webpack Plugin', (stats) => {
-    //   // TODO: kick out a JSON file with information about the Git branch and date of the last commit
-    //   console.log('asdf')
-    // })
-    compiler.hooks.emit.tapAsync('Git Branch Info Webpack Plugin', (compilation, callback) => {
-      console.log('asdf')
+  constructor (options) {
+    // Default options
+    this.options = {
+      ...{
+        pathToFile: './',
+        filename: 'git.json'
+      },
+      ...options
+    }
+  }
 
-      const pathToFile = './'
-      // Creates a JSON file used by the QABar to display current branch name and last commit date
+  apply (compiler) {
+    compiler.hooks.emit.tapAsync('Git Branch Info Webpack Plugin', (compilation, callback) => {
       let gitBranchName = ''
       let gitLastCommitDatetime = ''
+      let gitLastCommitAuthor = ''
+      let gitLastCommitHash = ''
 
       try {
         gitBranchName = execSync('git rev-parse --abbrev-ref HEAD').toString().trim()
@@ -33,17 +35,30 @@ class GitBranchInfoWebpackPlugin {
         console.error(e)
       }
 
-      const JSONContent = {
-        name: gitBranchName,
-        date: gitLastCommitDatetime
+      try {
+        gitLastCommitAuthor = execSync(`git log -1 --pretty=format:'%an'`).toString().trim()
+      } catch (e) {
+        console.error(e)
       }
 
-      // ./dist for build, ./static for development
-      const thepath = path.join(pathToFile, 'git.json')
-      fs.writeFile(thepath, JSON.stringify(JSONContent), (err) => {
+      try {
+        gitLastCommitHash = execSync('git rev-parse HEAD').toString().trim()
+      } catch (e) {
+        console.error(e)
+      }
+
+      const JSONContent = {
+        branch_name: gitBranchName,
+        last_commit_date: gitLastCommitDatetime,
+        last_commit_author: gitLastCommitAuthor,
+        last_commit_hash: gitLastCommitHash
+      }
+
+      const fullPath = path.join(this.options.pathToFile, this.options.filename)
+      fs.writeFile(fullPath, JSON.stringify(JSONContent), (err) => {
         if (err) {
           console.log('Passed error: ', err)
-          console.log('Unable to create git.json file in path: ' + thepath)
+          console.log('Unable to create git.json file in path: ' + fullPath)
           throw err
         }
       })
