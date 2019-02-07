@@ -60,6 +60,7 @@ class GitCommitInfoWebpackPlugin {
           throw err
         }
       })
+      callback()
     })
   }
 }
