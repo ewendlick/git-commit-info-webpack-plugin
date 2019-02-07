@@ -42,5 +42,14 @@ new GitCommitInfoWebpackPlugin({
 
 |Name|Type|Description|
 |:--:|:--:|:----------|
-|**`pathToFile`**|`{String}`|Path to folder that will contain the output file. This folder must exist.|
+|**`pathToFile`**|`{String}`|Path to folder that will contain the output file. This folder must already exist during Webpack's "afterEmit" compiler hook.|
 |**`filename`**|`{String}`|Name of the JSON output file.|
+
+A JSON file will be created with the following key-value pairs:
+
+|Key|Description|Example|
+|:-:|:---------:|:------|
+|**`branch_name`**|Current Git branch name|feature/my_new_feature|
+|**`last_commit_date`**|Datetime of latest commit|2019-02-06T06:10:03.000Z|
+|**`last_commit_author`**|Author of latest commit|eli.wendlick|
+|**`last_commit_has`**|Full hash of latest commit|154e57fca206014c30ccf6f520f0e918cc1f4256|

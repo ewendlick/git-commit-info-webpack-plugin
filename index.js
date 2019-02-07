@@ -15,7 +15,7 @@ class GitCommitInfoWebpackPlugin {
   }
 
   apply (compiler) {
-    compiler.hooks.emit.tapAsync('Git Commit Info Webpack Plugin', (compilation, callback) => {
+    compiler.hooks.afterEmit.tapAsync('Git Commit Info Webpack Plugin', (compilation, callback) => {
       let gitBranchName = ''
       let gitLastCommitDatetime = ''
       let gitLastCommitAuthor = ''
@@ -28,9 +28,7 @@ class GitCommitInfoWebpackPlugin {
       }
 
       try {
-        const commitDate = new Date(execSync('git log -1 --format=%ci'))
-        gitLastCommitDatetime = `${commitDate.getFullYear()}-${commitDate.getMonth() + 1}-${commitDate.getDate()}`
-          + ` ${commitDate.getHours()}:${commitDate.getMinutes()}`
+        gitLastCommitDatetime = new Date(execSync('git log -1 --format=%ci'))
       } catch (e) {
         console.error(e)
       }
