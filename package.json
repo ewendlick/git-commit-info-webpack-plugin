@@ -1,6 +1,6 @@
 {
   "name": "git-commit-info-webpack-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate a JSON file containing information about the current Git commit (branch name, author, commit message, commit hash, etc.) via Webpack",
   "main": "index.js",
   "scripts": {
