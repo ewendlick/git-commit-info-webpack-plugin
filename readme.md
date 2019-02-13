@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Git Commit Info Webpack Plugin</h1>
-  <p>Generate a JSON file containing information about the current Git commit via a <a href="http://webpack.github.io/">Webpack</a> plugin</p>
+  <p>Generate a JSON file containing information about the current Git commit via a <a href="http://webpack.github.io/">Webpack</a> 4 plugin</p>
 </div>
 
 <h2 align="center">Purpose</h2>
@@ -52,4 +52,4 @@ A JSON file will be created with the following key-value pairs:
 |**`branch_name`**|Current Git branch name|feature/my_new_feature|
 |**`last_commit_date`**|Datetime of latest commit|2019-02-06T06:10:03.000Z|
 |**`last_commit_author`**|Author of latest commit|eli.wendlick|
-|**`last_commit_has`**|Full hash of latest commit|154e57fca206014c30ccf6f520f0e918cc1f4256|
+|**`last_commit_hash`**|Full hash of latest commit|154e57fca206014c30ccf6f520f0e918cc1f4256|
